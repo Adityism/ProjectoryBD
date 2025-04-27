@@ -11,9 +11,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('.'));
 
-// PostgreSQL connection
+// PostgreSQL connection with SSL configuration
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false // Required for Render's self-signed certificate
+  }
 });
 
 // Test database connection
